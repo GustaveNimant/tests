@@ -1,0 +1,19 @@
+<div *ngIf="debug">Debug:Dans header.component.html</div>
+
+<header>
+    <ul class="header-navigation">
+	<li class="header-navigation-item">
+	    <a class="header-link"
+	       routerLink="/book-list"
+	       routerLinkActive="active">Mes Livres</a>
+	</li>
+
+    	<li class="header-navigation-item">
+	    <a class="header-link"
+	       routerLink="/my-observables"
+	       routerLinkActive="active">Mes Observables</a>
+	</li>
+    </ul>
+</header>
+
+<router-outlet></router-outlet>
