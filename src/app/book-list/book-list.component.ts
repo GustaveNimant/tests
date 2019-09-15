@@ -33,8 +33,13 @@ export class BookListComponent implements OnInit {
 	    messagingSenderId: "1012969104430",
 	    appId: "1:1012969104430:web:815509d2f2949a33"
 	};
-
-	firebase.initializeApp(config);
+	
+	if (firebase.apps.length) {
+	    console.log ('Dans constructor firebase déjà initialisée');
+	} else {
+	    firebase.initializeApp(config);
+	    console.log ('Dans constructor. firebase initialisée');
+	}
 	this.getBooks();
     }
 

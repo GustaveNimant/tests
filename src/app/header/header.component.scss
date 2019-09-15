@@ -1,0 +1,31 @@
+.bs-example{
+  margin: 20px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  background-color: #aaaaaa;
+  color: white;
+  padding: 0.2rem 2%;
+}
+
+header-title {
+  display: flex;
+  text-align: center;
+  background-color: #6eb5ff;;
+  color: white;
+  padding: 0.2rem 2%;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin: 0 0 0 5%;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 5px 14px;
+}

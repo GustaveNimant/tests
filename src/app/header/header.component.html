@@ -1,17 +1,32 @@
-<div *ngIf="debug">Debug:Dans header.component.html</div>
-
 <header>
-    <ul class="header-navigation">
-	<li class="header-navigation-item">
-	    <a class="header-link"
+    <ul class="dropdown-menu dropdown-menu-right">
+	<li class="nav-item dropdown">
+	    <a class="nav-link dropdown-toggle" 
 	       routerLink="/book-list"
 	       routerLinkActive="active">Mes Livres</a>
 	</li>
 
-    	<li class="header-navigation-item">
-	    <a class="header-link"
+    	<li class="nav-item dropdown">
+	    <a class="nav-link dropdown-toggle" 
 	       routerLink="/my-observables"
 	       routerLinkActive="active">Mes Observables</a>
+	</li>
+
+    	<li class="nav-item dropdown">
+	    <a class="nav-link dropdown-toggle" 
+	       routerLink="/my-functions"
+	       routerLinkActive="active">Mes Functions</a>
+	</li>
+	
+	<li class="header-navigation-item">
+	    <button class="btn btn-danger" *ngIf="debug" (click)="onDebugSwitch()">Fin de Debug</button>
+	    <button class="btn btn-success" *ngIf="!debug" (click)="onDebugSwitch()">Debug</button>
+	</li>
+
+        <li class="nav-item dropdown">
+	    <a class="nav-link dropdown-toggle" 
+	       routerLink="/irp-provider"
+	       routerLinkActive="active">Irp Provider</a>
 	</li>
     </ul>
 </header>

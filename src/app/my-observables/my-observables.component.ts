@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { map, tap } from 'rxjs/operators';
 import { of, from, interval} from 'rxjs';
 import { Observable } from 'rxjs';
-
+import { Subscription }       from 'rxjs';
 
 import * as outils from '../models/outils';
 
@@ -12,16 +12,39 @@ import * as outils from '../models/outils';
     styleUrls: ['./my-observables.component.scss']
 })
 
-export class MyObservablesComponent implements OnInit {
+export class MyObservablesComponent implements OnInit, OnDestroy {
 
+    public N_value: string;
     public O_value: string;
-    public P_value: string;
+    public P_value: number;
+    public Q_value: number;
+
+    private nSub: Subscription;
+    private oSub: Subscription;
+    private pSub: Subscription;
+    private qSub: Subscription;
     
     constructor() {
 	console.log ('Entrée dans constructor')
     }
     
     ngOnInit() {
+	const N = this.myObservable(1);
+	console.log('Observable N', N);
+	
+	this.nSub = N.subscribe(
+	    (val) => {
+		this.N_value = val;
+		console.log('Observable N valeur',val);
+	    }, (error) => {
+		console.log(error);
+	    }, () => {
+		console.log('Fini !');
+	    });
+
+	console.log('nSub',this.nSub);
+	console.log('N_value',this.N_value);
+	
 	const O = this.myObservable(2);
 	console.log('Observable O', O);
 	
@@ -37,33 +60,36 @@ export class MyObservablesComponent implements OnInit {
 
 	console.log('O_value',this.O_value);
 	
-	const P = this.myObservable(2);
+	const P = this.myObservable(3);
 	console.log('Observable P', P);
-	P.pipe(
-	    tap((val) => console.log('Avant : ' + val)),
+	this.pSub = P.pipe(
+	    tap((val) => console.log('P Avant : ' + val)),
 	    map((val: string) => val.length),
-	    tap((val) => console.log('Après : ' + val)),
+	    tap((val) => console.log('P Après : ' + val)),
 	).subscribe((val: number) => {
-	    console.log(val);  // 6
+	    this.P_value = val;
+	    console.log(val);  // 5
 	});
-
-	const Q = this.myObservable(2);
+	console.log('pSub',this.pSub);
+	console.log('P_value',this.P_value);
+	
+	const Q = this.myObservable(4);
 	console.log('Observable Q', Q);
-	Q.pipe(
-	    tap((val) => console.log('Avant : ' + val)),
-	    map((val: string) => val.length),
-	    tap((val) => console.log('Après : ' + val)),
+	this.qSub = Q.pipe(
+	    tap((val) => console.log('Q Avant : ' + val)),
+	    map((val: number) => val + 10),
+	    tap((val) => console.log('Q Après : ' + val)),
 	).subscribe((val: number) => {
-	    console.log(val);  // 6
+	    this.Q_value = val;
+	    console.log(val);  
 	});
-
     }
     
     myObservable(num: number):Observable<any> {
-	const myObservable1 = of(42);
-	const myObservable2 = from(['bonjour', 'le', 'monde']);
-	const myObservable3 = interval(2000);
-	const myObservable4 = of("foobar");
+	const myObservable1 = of(10, 42, "s");
+	const myObservable2 = of("foobar");
+	const myObservable3 = from(['bonjour', 'le ', 'monde']);
+	const myObservable4 = interval(2000);
 	
 	switch (num) {
 	    case 1:
@@ -81,6 +107,11 @@ export class MyObservablesComponent implements OnInit {
 	    default:
 		break;
 	}
+    }
+
+    ngOnDestroy() {
+	console.log('Dans ngOnDestroy Observable Q unsubscribed');
+	this.qSub.unsubscribe();
     }
 
 }

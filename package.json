@@ -22,11 +22,15 @@
     "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
+    "crypto": "^1.0.1",
     "express": "^4.17.1",
     "firebase": "^6.2.0",
+    "jssha": "^2.3.1",
     "mongoose": "^5.6.11",
     "rxjs": "~6.3.3",
+    "sha.js": "^2.4.11",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
@@ -50,5 +54,17 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2"
-  }
+  },
+  "description": "Copied from [StackOverFlow](https://stackblitz.com/edit/firebase-stackoverflow)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GustaveNimant/tests.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GustaveNimant/tests/issues"
+  },
+  "homepage": "https://github.com/GustaveNimant/tests#readme"
 }
